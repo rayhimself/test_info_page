@@ -1,0 +1,16 @@
+laguage: python
+python:
+  - "3.6"      # current default Python on Travis CI
+install:
+  - pip install -U sphinx
+script:
+  - sphinx-build -b html . build
+before-deploy:
+  - mv  -v build/* .
+deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN
+  keep-history: true
+  on:
+    branch: master
